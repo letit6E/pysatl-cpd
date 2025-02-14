@@ -2,21 +2,23 @@
 Module for implementation of Linear Scrubber.
 """
 
-__author__ = "Romanyuk Artem"
-__copyright__ = "Copyright (c) 2024 Romanyuk Artem"
+__author__ = "Romanyuk Artem and Rustam Shangareev"
+__copyright__ = "Copyright (c) 2025 Romanyuk Artem and Rustam Shangareev"
 __license__ = "SPDX-License-Identifier: MIT"
 
 from collections.abc import Iterable, Sequence
-
-import numpy
+from typing import TypeVar
 
 from CPDShell.Core.scrubber.abstract_scrubber import Scrubber
 
 
-class LinearScrubber(Scrubber):
+T = TypeVar("T")  # Generic type for scrubber data elements
+
+
+class LinearScrubber(Scrubber[T]):
     """A linear scrubber for dividing data into windows by moving them through data"""
 
-    def __init__(
+    def init(
         self,
         window_length: int = 100,
         shift_factor: float = 1.0 / 3.0,
@@ -26,7 +28,7 @@ class LinearScrubber(Scrubber):
         :param window_length: length of data window
         :param shift_factor: how far will the window move relative to the length
         """
-        super().__init__()
+        super().init()
         self._window_length = window_length
         self._shift_factor = shift_factor
         self._window_start = 0
@@ -37,7 +39,7 @@ class LinearScrubber(Scrubber):
         self.is_running = True
         self._window_start = 0
 
-    def get_windows(self) -> Iterable[Sequence[float | numpy.float64]]:
+    def get_windows(self) -> Iterable[Sequence[T]]:
         while (
             self._data
             and self._window_start == 0
