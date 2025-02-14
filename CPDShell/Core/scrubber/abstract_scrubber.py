@@ -14,16 +14,16 @@ import numpy
 
 from CPDShell.Core.scrubber_scenario import ScrubberScenario
 
-T = TypeVar("T")  # Generic type for scrubber data elements
+T = float | numpy.float64  # Generic type for scrubber data elements
 
 
-class Scrubber(ABC, Generic[T]):
+class Scrubber(ABC):
     """A scrubber for dividing data into windows
     and subsequent processing of data windows
     by change point detection algorithms
     """
 
-    def init(self) -> None:
+    def __init__(self) -> None:
         """A scrubber for dividing data into windows
         and subsequent processing of data windows
         by change point detection algorithms

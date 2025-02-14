@@ -12,13 +12,13 @@ from typing import TypeVar
 from CPDShell.Core.scrubber.abstract_scrubber import Scrubber
 
 
-T = TypeVar("T")  # Generic type for scrubber data elements
+T = float# Generic type for scrubber data elements
 
 
-class LinearScrubber(Scrubber[T]):
+class LinearScrubber(Scrubber):
     """A linear scrubber for dividing data into windows by moving them through data"""
 
-    def init(
+    def __init__(
         self,
         window_length: int = 100,
         shift_factor: float = 1.0 / 3.0,
@@ -28,7 +28,7 @@ class LinearScrubber(Scrubber[T]):
         :param window_length: length of data window
         :param shift_factor: how far will the window move relative to the length
         """
-        super().init()
+        super().__init__()
         self._window_length = window_length
         self._shift_factor = shift_factor
         self._window_start = 0
